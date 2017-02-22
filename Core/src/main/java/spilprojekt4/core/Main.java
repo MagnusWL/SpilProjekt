@@ -11,5 +11,7 @@ package spilprojekt4.core;
  * @author Magnus
  */
 public class Main {
-    
+    public static void main(String[] args){
+        new Game();
+    }
 }
