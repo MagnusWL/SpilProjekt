@@ -16,6 +16,6 @@ public class Game {
     World world;
     GameData gameData;
     public Game(){
-        
+        System.out.println("Game Started");
     }
 }
