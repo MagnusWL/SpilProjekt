@@ -5,10 +5,17 @@
  */
 package spilprojekt4.core;
 
+import spilprojekt4.common.GameData;
+import spilprojekt4.common.World;
+
 /**
  *
  * @author Magnus
  */
 public class Game {
-    
+    World world;
+    GameData gameData;
+    public Game(){
+        System.out.println("Game Started");
+    }
 }
