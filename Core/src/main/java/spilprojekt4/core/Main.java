@@ -6,13 +6,13 @@ package spilprojekt4.core;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Magnus
  */
 public class Main {
-    public static void main(String[] args){
-        new Game();
+
+    public static void main(String[] args) {
+        
     }
 }
