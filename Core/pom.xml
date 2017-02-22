@@ -14,6 +14,61 @@
             <artifactId>Common</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>gdx</groupId>
+            <artifactId>gdx.jar</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>gdx</groupId>
+            <artifactId>gdx-natives.jar</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>gdx</groupId>
+            <artifactId>gdx-sources.jar</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>gdx</groupId>
+            <artifactId>gdx-backend-lwjgl.jar</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>gdx</groupId>
+            <artifactId>gdx-backend-lwjgl3.jar</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>gdx</groupId>
+            <artifactId>gdx-backend-lwjgl-natives.jar</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>gdx</groupId>
+            <artifactId>gdx-box2d.jar</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>gdx</groupId>
+            <artifactId>gdx-box2d-gwt.jar</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>gdx</groupId>
+            <artifactId>gdx-freetype.jar</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>gdx</groupId>
+            <artifactId>gdx-freetype-natives.jar</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>gdx</groupId>
+            <artifactId>gdx-box2d-natives.jar</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
