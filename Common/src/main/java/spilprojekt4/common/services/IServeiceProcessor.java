@@ -1,6 +1,6 @@
 package spilprojekt4.common.services;
 
-public interface IPlugin {
+public interface IServeiceProcessor {
     public void start();
     public void stop();
 }
