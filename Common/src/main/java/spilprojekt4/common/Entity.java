@@ -6,7 +6,7 @@ public class Entity {
     private EntityType entityType;
     private int x;
     private int y;
-    private float velocity;
+    private float verticalVelocity;
     private boolean hasGravity;
     private UUID ID = UUID.randomUUID();
     private int[][] map;
@@ -31,12 +31,12 @@ public class Entity {
         this.map = map;
     }
     
-    public float getVelocity() {
-        return velocity;
+    public float getVerticalVelocity() {
+        return verticalVelocity;
     }
 
-    public void setVelocity(float velocity) {
-        this.velocity = velocity;
+    public void setVerticalVelocity(float velocity) {
+        this.verticalVelocity = velocity;
     }
 
     public boolean isHasGravity() {
