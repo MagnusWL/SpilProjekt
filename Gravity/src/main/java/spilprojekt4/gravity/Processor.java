@@ -16,6 +16,23 @@ public class Processor implements IServiceProcessor {
         {
             if(n.isHasGravity() == true)
             {
+                /*
+                //force
+                F = m*a
+                
+                F = force
+                m = mass
+                a = acceleration
+                
+                
+                //velocity
+                v = u+a *t
+                u = initial velocity
+                a = acceleration
+                t = time
+                */
+                
+                
                 n.setVelocity(0);
                 
             }

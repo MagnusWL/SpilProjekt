@@ -4,8 +4,8 @@ import java.util.UUID;
 
 public class Entity {
     private EntityType entityType;
-    private int x;
-    private int y;
+    private float x;
+    private float y;
     private float verticalVelocity;
     private boolean hasGravity;
     private UUID ID = UUID.randomUUID();
@@ -47,19 +47,19 @@ public class Entity {
         this.hasGravity = hasGravity;
     }
 
-    public int getX() {
+    public float getX() {
         return x;
     }
 
-    public void setX(int x) {
+    public void setX(float x) {
         this.x = x;
     }
 
-    public int getY() {
+    public float getY() {
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(float y) {
         this.y = y;
     }
 
