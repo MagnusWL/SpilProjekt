@@ -6,7 +6,7 @@
         <artifactId>spilprojekt4</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
-    <artifactId>PlayerController</artifactId>
+    <artifactId>Player</artifactId>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
@@ -15,5 +15,5 @@
             <version>${project.version}</version>
         </dependency>
     </dependencies>
-    <name>PlayerController</name>
+    <name>Player</name>
 </project>

@@ -25,7 +25,9 @@ public class Initializer implements IServiceInitializer {
     }
     
     private Entity createPlayer() {
+        Entity playerCharacter = new Entity();
         
+        return playerCharacter;
     }
 
     @Override
