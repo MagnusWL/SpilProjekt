@@ -13,6 +13,7 @@
         <module>Collision</module>
         <module>Gravity</module>
         <module>PlayerController</module>
+        <module>PlayerMovement</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
