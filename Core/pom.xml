@@ -8,6 +8,14 @@
     </parent>
     <artifactId>Core</artifactId>
     <packaging>jar</packaging>
+    
+    <repositories>
+        <repository>
+            <id>gdx-nightlies</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </repository>
+    </repositories>
+    
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -23,6 +31,7 @@
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-platform</artifactId>
             <version>1.9.5</version>
+            <classifier>natives-desktop</classifier>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
@@ -33,6 +42,7 @@
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-box2d-platform</artifactId>
             <version>1.9.5</version>
+            <classifier>natives-desktop</classifier>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
@@ -43,6 +53,7 @@
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-freetype-platform</artifactId>
             <version>1.9.5</version>
+            <classifier>natives-desktop</classifier>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
