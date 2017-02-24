@@ -3,6 +3,24 @@ package spilprojekt4.common;
 public class Entity {
     private int x;
     private int y;
+    private float velocity;
+    private boolean hasGravity;
+
+    public float getVelocity() {
+        return velocity;
+    }
+
+    public void setVelocity(float velocity) {
+        this.velocity = velocity;
+    }
+
+    public boolean isHasGravity() {
+        return hasGravity;
+    }
+
+    public void setHasGravity(boolean hasGravity) {
+        this.hasGravity = hasGravity;
+    }
 
     public int getX() {
         return x;
