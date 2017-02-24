@@ -3,6 +3,7 @@ package spilprojekt4.common;
 import java.util.UUID;
 
 public class Entity {
+    private EntityType entityType;
     private int x;
     private int y;
     private float velocity;
@@ -10,6 +11,26 @@ public class Entity {
     private UUID ID = UUID.randomUUID();
     private int[][] map;
 
+    public EntityType getEntityType()
+    {
+        return entityType;
+    }
+
+    public void setEntityType(EntityType entityType)
+    {
+        this.entityType = entityType;
+    }
+    
+    public int[][] getMap()
+    {
+        return map;
+    }
+
+    public void setMap(int[][] map)
+    {
+        this.map = map;
+    }
+    
     public float getVelocity() {
         return velocity;
     }
