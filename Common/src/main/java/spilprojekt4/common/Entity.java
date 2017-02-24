@@ -9,6 +9,7 @@ public class Entity {
     private float[] shapeX;
     private float[] shapeY;
     private float velocity;
+    private float verticalVelocity;
     private boolean hasGravity;
     private UUID ID = UUID.randomUUID();
     private int[][] map;
@@ -29,8 +30,14 @@ public class Entity {
         this.shapeY = shapeY;
     }
 
-    
-    
+    public float getVelocity() {
+        return velocity;
+    }
+
+    public void setVelocity(float velocity) {
+        this.velocity = velocity;
+    }
+
     public EntityType getEntityType()
     {
         return entityType;
@@ -51,12 +58,12 @@ public class Entity {
         this.map = map;
     }
     
-    public float getVelocity() {
-        return velocity;
+    public float getVerticalVelocity() {
+        return verticalVelocity;
     }
 
-    public void setVelocity(float velocity) {
-        this.velocity = velocity;
+    public void setVerticalVelocity(float velocity) {
+        this.verticalVelocity = velocity;
     }
 
     public boolean isHasGravity() {

@@ -11,7 +11,7 @@ public class Processor implements IServiceProcessor {
     @Override
     public void process(GameData gameData, World world) {
 
-        for (Entity entity : world.getEntities(EntityType.PlAYER)) {
+        for (Entity entity : world.getEntities(EntityType.PLAYER)) {
 
             if (gameData.getKeys().isDown(1)) {
                 //left

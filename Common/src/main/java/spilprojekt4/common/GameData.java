@@ -6,6 +6,11 @@ public class GameData {
     private int displayHeight;
     private int mapWidth;
     private int tileSize;
+    private final float gravityConstant = 0.01f;
+
+    public float getGravityConstant() {
+        return gravityConstant;
+    }
 
     public int getTileSize() {
         return tileSize;
