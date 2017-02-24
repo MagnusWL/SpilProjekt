@@ -6,11 +6,31 @@ public class Entity {
     private EntityType entityType;
     private float x;
     private float y;
+    private float[] shapeX;
+    private float[] shapeY;
     private float velocity;
     private boolean hasGravity;
     private UUID ID = UUID.randomUUID();
     private int[][] map;
 
+    public float[] getShapeX() {
+        return shapeX;
+    }
+
+    public void setShapeX(float[] shapeX) {
+        this.shapeX = shapeX;
+    }
+
+    public float[] getShapeY() {
+        return shapeY;
+    }
+
+    public void setShapeY(float[] shapeY) {
+        this.shapeY = shapeY;
+    }
+
+    
+    
     public EntityType getEntityType()
     {
         return entityType;
