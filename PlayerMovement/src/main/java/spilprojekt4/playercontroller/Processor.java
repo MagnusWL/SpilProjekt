@@ -1,4 +1,4 @@
-package spilprojekt4.playermovement;
+package spilprojekt4.playercontroller;
 
 import spilprojekt4.common.Entity;
 import spilprojekt4.common.EntityType;
