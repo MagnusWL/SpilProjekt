@@ -15,6 +15,7 @@ import spilprojekt4.common.Entity;
 import spilprojekt4.common.GameData;
 import spilprojekt4.common.World;
 import spilprojekt4.common.services.IServiceProcessor;
+import spilprojekt4.playercontroller.Processor;
 
 /**
  *
@@ -25,7 +26,7 @@ public class Game implements ApplicationListener {
     private World world = new World();
     private GameData gameData = new GameData();
     private OrthographicCamera cam;
-    private IServiceProcessor playerMovement;
+    private IServiceProcessor playerController;
     
 
     public Game() {
@@ -42,7 +43,7 @@ public class Game implements ApplicationListener {
         cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
         cam.update();
         
-        playerMovement = new spilprojekt4.playermovement.Processor();
+        playerController = new Processor();
 
     }
 

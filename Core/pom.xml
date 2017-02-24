@@ -86,12 +86,12 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>PlayerMovement</artifactId>
+            <artifactId>Collision</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Camera</artifactId>
+            <artifactId>Gravity</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -101,12 +101,12 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Collision</artifactId>
+            <artifactId>Camera</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Gravity</artifactId>
+            <artifactId>Player</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
