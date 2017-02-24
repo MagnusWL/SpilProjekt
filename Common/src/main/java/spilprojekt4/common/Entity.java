@@ -63,7 +63,7 @@ public class Entity {
         this.y = y;
     }
 
-    public UUID getID() {
-        return ID;
+    public String getID() {
+        return ID.toString();
     }
 }

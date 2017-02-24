@@ -20,12 +20,17 @@ public class Initializer implements IServiceInitializer {
 
     @Override
     public void start(GameData gameData, World world) {
-        player = createPlayer();
+        player = createPlayer(gameData, world);
         world.addEntity(player);
     }
     
-    private Entity createPlayer() {
+    private Entity createPlayer(GameData gameData, World world) {
         Entity playerCharacter = new Entity();
+        
+        playerCharacter.setX((int) (gameData.getDisplayWidth() * 0.5));
+        playerCharacter.setY((int) (gameData.getDisplayHeight() * 0.5));
+        
+        
         
         return playerCharacter;
     }
