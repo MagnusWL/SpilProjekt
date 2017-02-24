@@ -1,11 +1,13 @@
 package spilprojekt4.common;
 
+import java.util.UUID;
+
 public class Entity {
     private int x;
     private int y;
     private float velocity;
     private boolean hasGravity;
-    private String ID;
+    private UUID ID = UUID.randomUUID();
     private int[][] map;
 
     public float getVelocity() {
@@ -40,12 +42,7 @@ public class Entity {
         this.y = y;
     }
 
-    public String getID() {
+    public UUID getID() {
         return ID;
-    }
-    
-    public void setID(String ID)
-    {
-        this.ID = ID;
     }
 }
