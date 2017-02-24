@@ -54,7 +54,7 @@ public class Game implements ApplicationListener {
         
         update();
         
-        draw();
+        
         
         gameData.getKeys().update();
 
@@ -80,7 +80,5 @@ public class Game implements ApplicationListener {
     public void dispose() {
     }
 
-    private void draw() {
-    }
 
 }
