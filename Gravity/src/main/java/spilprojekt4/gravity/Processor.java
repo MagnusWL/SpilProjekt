@@ -16,5 +16,5 @@ public class Processor implements IServiceProcessor {
                 n.setVelocity(0);
             }
         }
-        }
+    }
 }
