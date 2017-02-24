@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import spilprojekt4.common.GameData;
 import spilprojekt4.common.World;
+import spilprojekt4.common.services.IServiceProcessor;
 
 /**
  *
@@ -18,9 +19,11 @@ import spilprojekt4.common.World;
  */
 public class Game implements ApplicationListener {
 
-    World world;
-    GameData gameData = new GameData();
-    OrthographicCamera cam;
+    private World world = new World();
+    private GameData gameData = new GameData();
+    private OrthographicCamera cam;
+    private IServiceProcessor playerMovement;
+    
 
     public Game() {
         System.out.println("Game Started");
@@ -35,6 +38,8 @@ public class Game implements ApplicationListener {
         cam = new OrthographicCamera(gameData.getDisplayWidth(), gameData.getDisplayHeight());
         cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
         cam.update();
+        
+        playerMovement = new spilprojekt4.playermovement.Processor();
 
     }
 
@@ -46,7 +51,17 @@ public class Game implements ApplicationListener {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         gameData.setDelta(Gdx.graphics.getDeltaTime());
+        
+        update();
+        
+        draw();
+        
+        gameData.getKeys().update();
 
+    }
+    
+    private void update() {
+        
     }
 
     @Override
@@ -63,6 +78,9 @@ public class Game implements ApplicationListener {
 
     @Override
     public void dispose() {
+    }
+
+    private void draw() {
     }
 
 }
