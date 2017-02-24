@@ -15,6 +15,10 @@ public class World {
     }
 
     public void addEntity(Entity entity) {
-        entityMap.put(entity.getID(), entity);
+        entityMap.put(entity.getID(),entity);
+    }
+    
+    public void removeEntity (Entity entity) {
+        entityMap.remove(entity.getID());
     }
 }

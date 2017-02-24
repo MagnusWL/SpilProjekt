@@ -1,6 +1,7 @@
 package spilprojekt4.map;
 
 import spilprojekt4.common.Entity;
+import spilprojekt4.common.EntityType;
 import spilprojekt4.common.GameData;
 import spilprojekt4.common.World;
 import spilprojekt4.common.services.IServiceInitializer;
@@ -28,7 +29,10 @@ public class Initializer implements IServiceInitializer {
     private Entity generateMap(GameData gameData)
     {
         Entity newMap = new Entity();
+        newMap.setEntityType(EntityType.MAP);
+        int[][] newMapInt = new int[gameData.getMapWidth()][gameData.getMapHeight()];
         
+        newMap.setMap(newMapInt);
         return newMap;
     }
 }
