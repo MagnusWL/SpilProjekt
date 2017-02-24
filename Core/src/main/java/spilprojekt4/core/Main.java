@@ -14,7 +14,6 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
  * @author Magnus
  */
 public class Main {
-
     public static void main(String[] args) {
         LwjglApplicationConfiguration cfg
                 = new LwjglApplicationConfiguration();

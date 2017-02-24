@@ -1,2 +1,6 @@
 /Common/target/
 /Core/target/
+/PlayerMovement/target/
+/Camera/target/
+/Collision/target/
+/Gravity/target/
