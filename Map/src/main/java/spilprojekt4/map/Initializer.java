@@ -30,9 +30,9 @@ public class Initializer implements IServiceInitializer {
     {
         Entity newMap = new Entity();
         newMap.setEntityType(EntityType.MAP);
-        int[][] map = new int[gameData.getMapWidth()][gameData.getMapHeight()];
+        int[][] newMapInt = new int[gameData.getMapWidth()][gameData.getMapHeight()];
         
-        newMap.setMap(map);
+        newMap.setMap(newMapInt);
         return newMap;
     }
 }
