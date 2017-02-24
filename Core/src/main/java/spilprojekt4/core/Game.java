@@ -26,6 +26,7 @@ public class Game implements ApplicationListener {
     private GameData gameData = new GameData();
     private OrthographicCamera cam;
     private IServiceProcessor playerMovement;
+    private IServiceProcessor gravity;
     
 
     public Game() {
@@ -43,7 +44,7 @@ public class Game implements ApplicationListener {
         cam.update();
         
         playerMovement = new spilprojekt4.playermovement.Processor();
-
+        gravity = new spilprojekt4.gravity.Processor();
     }
 
     @Override
