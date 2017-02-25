@@ -30,7 +30,7 @@ public class Initializer implements IServiceInitializer {
         
         playerCharacter.setEntityType(EntityType.PLAYER);
         playerCharacter.setX((int) (gameData.getDisplayWidth() * 0.5));
-        playerCharacter.setY((int) (gameData.getDisplayHeight() * 0.5));
+        playerCharacter.setY((int) (gameData.getDisplayHeight() * 0.8));
         playerCharacter.setHasGravity(true);
         
         return playerCharacter;

@@ -7,17 +7,11 @@ package spilprojekt4.core;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.PolygonRegion;
-import com.badlogic.gdx.graphics.g2d.PolygonSprite;
-import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import java.util.ArrayList;
@@ -28,7 +22,6 @@ import spilprojekt4.common.GameData;
 import spilprojekt4.common.World;
 import spilprojekt4.common.services.IServiceInitializer;
 import spilprojekt4.common.services.IServiceProcessor;
-import spilprojekt4.playercontroller.Processor;
 
 /**
  *
@@ -39,7 +32,7 @@ public class Game implements ApplicationListener {
     private World world;
     private GameData gameData;
     private OrthographicCamera cam;
-    private IServiceProcessor playerProcessor;
+    private IServiceProcessor playerProcessor, gravityProcessor, collisionProcessor;
     private IServiceInitializer mapInitializer, playerInitializer;
     private List<IServiceProcessor> processorList;
 
@@ -62,13 +55,20 @@ public class Game implements ApplicationListener {
         cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
         cam.update();
 
+        gravityProcessor = new spilprojekt4.gravity.Processor();
+        collisionProcessor = new spilprojekt4.collision.Processor();
         playerProcessor = new spilprojekt4.playercontroller.Processor();
         playerInitializer = new spilprojekt4.playercontroller.Initializer();
         mapInitializer = new spilprojekt4.map.Initializer();
         processorList.add(playerProcessor);
+        processorList.add(gravityProcessor);
+        processorList.add(collisionProcessor);
 
         playerInitializer.start(gameData, world);
+        playerInitializer.start(gameData, world);
         mapInitializer.start(gameData, world);
+        
+        new InputController(gameData);
     }
 
     @Override
@@ -93,7 +93,7 @@ public class Game implements ApplicationListener {
                     }
 
                     sr.rect(gameData.getTileSize() * i,
-                            gameData.getDisplayHeight() - gameData.getTileSize() - gameData.getTileSize() * j,
+                            gameData.getTileSize() * j,
                             gameData.getTileSize(), gameData.getTileSize());
                 }
             }
@@ -101,8 +101,6 @@ public class Game implements ApplicationListener {
         }
 
         for (Entity entity : world.getEntities(EntityType.PLAYER)) {
-            System.out.println(Gdx.files.getLocalStoragePath().toString());
-
             SpriteBatch batch = new SpriteBatch();
             Texture texture = new Texture(Gdx.files.internal("midgårdsormen.png"));
             Sprite sprite = new Sprite(texture);
@@ -123,8 +121,8 @@ public class Game implements ApplicationListener {
                 for (int i = 0, j = shapex.length - 1; i < shapex.length; j = i++) {
                     sr.line(shapex[i], shapey[i], shapex[j], shapey[j]);
                 sr.end();
-            }
-                }*/
+                }
+            }*/
         }
 
         gameData.getKeys().update();
