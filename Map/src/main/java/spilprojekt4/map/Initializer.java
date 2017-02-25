@@ -15,8 +15,6 @@ public class Initializer implements IServiceInitializer {
 
     @Override
     public void start(GameData gameData, World world) {
-
-        // Add entities to the world
         map = generateMap(gameData);
         world.addEntity(map);
     }
@@ -28,10 +26,17 @@ public class Initializer implements IServiceInitializer {
     
     private Entity generateMap(GameData gameData)
     {
-        Entity newMap = new Entity();
-        newMap.setEntityType(EntityType.MAP);
         int[][] newMapInt = new int[gameData.getMapWidth()][gameData.getMapHeight()];
         
+        for(int i = 0; i < gameData.getMapWidth(); i++)
+            for(int j = 0; j < gameData.getMapHeight(); j++)
+                if(j > (int)(gameData.getMapHeight()/2))
+                    newMapInt[i][j] = 1;
+                else
+                    newMapInt[i][j] = 0;
+        
+        Entity newMap = new Entity();
+        newMap.setEntityType(EntityType.MAP);
         newMap.setMap(newMapInt);
         return newMap;
     }

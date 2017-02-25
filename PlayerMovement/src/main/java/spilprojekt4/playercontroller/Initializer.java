@@ -6,6 +6,7 @@
 package spilprojekt4.playercontroller;
 
 import spilprojekt4.common.Entity;
+import spilprojekt4.common.EntityType;
 import spilprojekt4.common.GameData;
 import spilprojekt4.common.World;
 import spilprojekt4.common.services.IServiceInitializer;
@@ -27,10 +28,10 @@ public class Initializer implements IServiceInitializer {
     private Entity createPlayer(GameData gameData, World world) {
         Entity playerCharacter = new Entity();
         
+        playerCharacter.setEntityType(EntityType.PLAYER);
         playerCharacter.setX((int) (gameData.getDisplayWidth() * 0.5));
         playerCharacter.setY((int) (gameData.getDisplayHeight() * 0.5));
-        
-        playerCharacter.isHasGravity();
+        playerCharacter.setHasGravity(true);
         
         return playerCharacter;
     }

@@ -29,8 +29,7 @@ public class Processor implements IServiceProcessor {
                 entity.setVelocity(0);
             }
 
-            entity.setX((entity.getX() + entity.getVelocity()) * gameData.getDelta());
-            
+ //           entity.setX((entity.getX() + entity.getVelocity()) * gameData.getDelta());
             entity.setShapeX(new float[] {
                 entity.getX() - 4, 
                 entity.getX() + 4, 

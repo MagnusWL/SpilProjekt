@@ -66,7 +66,7 @@ public class Entity {
         this.verticalVelocity = velocity;
     }
 
-    public boolean isHasGravity() {
+    public boolean getHasGravity() {
         return hasGravity;
     }
 

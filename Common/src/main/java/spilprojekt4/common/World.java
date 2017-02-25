@@ -1,6 +1,7 @@
 package spilprojekt4.common;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -11,6 +12,9 @@ public class World {
 
     public List<Entity> getEntities(EntityType... entityTypes) {
         List<Entity> r = new ArrayList<>();
+        for(Entity e: entityMap.values())
+            if(Arrays.asList(entityTypes).contains(e.getEntityType()))
+                r.add(e);
         return r;
     }
 
