@@ -22,6 +22,7 @@ import spilprojekt4.common.GameData;
 import spilprojekt4.common.World;
 import spilprojekt4.common.services.IServiceInitializer;
 import spilprojekt4.common.services.IServiceProcessor;
+import spilprojekt4.util.SPILocator;
 
 /**
  *
@@ -32,8 +33,6 @@ public class Game implements ApplicationListener {
     private World world;
     private GameData gameData;
     private OrthographicCamera cam;
-    private IServiceProcessor playerProcessor, gravityProcessor, collisionProcessor;
-    private IServiceInitializer mapInitializer, playerInitializer;
     private List<IServiceProcessor> processorList;
 
     public Game() {
@@ -55,18 +54,8 @@ public class Game implements ApplicationListener {
         cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
         cam.update();
 
-        gravityProcessor = new spilprojekt4.gravity.Processor();
-        collisionProcessor = new spilprojekt4.collision.Processor();
-        playerProcessor = new spilprojekt4.playercontroller.Processor();
-        playerInitializer = new spilprojekt4.playercontroller.Initializer();
-        mapInitializer = new spilprojekt4.map.Initializer();
-        processorList.add(playerProcessor);
-        processorList.add(gravityProcessor);
-        processorList.add(collisionProcessor);
-
-        playerInitializer.start(gameData, world);
-        playerInitializer.start(gameData, world);
-        mapInitializer.start(gameData, world);
+        for(IServiceInitializer i: SPILocator.locateAll(IServiceInitializer.class))
+            i.start(gameData, world);
         
         new InputController(gameData);
     }
@@ -80,6 +69,9 @@ public class Game implements ApplicationListener {
 
         gameData.setDelta(Gdx.graphics.getDeltaTime());
 
+        for(IServiceProcessor e: SPILocator.locateAll(IServiceProcessor.class))
+            e.process(gameData, world);
+        
         update();
         sr.setAutoShapeType(true);
         for (Entity map : world.getEntities(EntityType.MAP)) {

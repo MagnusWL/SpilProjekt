@@ -13,7 +13,6 @@ public class Processor implements IServiceProcessor {
         for (Entity map : world.getEntities(EntityType.MAP)) {
             for (Entity entity : world.getEntities(EntityType.PLAYER)) {
                 boolean colliding = getCollision(entity, map, gameData);
-                System.out.println(colliding);
             }
         }
     }
