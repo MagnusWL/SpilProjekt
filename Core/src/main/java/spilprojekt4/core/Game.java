@@ -22,7 +22,7 @@ import spilprojekt4.common.GameData;
 import spilprojekt4.common.World;
 import spilprojekt4.common.services.IServiceInitializer;
 import spilprojekt4.common.services.IServiceProcessor;
-import spilprojekt4.util.SPILocator;
+import spilprojekt4.common.util.SPILocator;
 
 /**
  *

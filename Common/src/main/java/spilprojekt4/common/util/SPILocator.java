@@ -1,4 +1,4 @@
-package spilprojekt4.util;
+package spilprojekt4.common.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
