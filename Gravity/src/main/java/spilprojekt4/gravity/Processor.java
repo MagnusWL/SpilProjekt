@@ -17,8 +17,7 @@ public class Processor implements IServiceProcessor {
             if (n.getHasGravity() == true) {
                 n.setVerticalVelocity(n.getVerticalVelocity() + gameData.getGravityConstant());
             }
-            n.setX(n.getX() + n.getVelocity() * gameData.getDelta());
-            n.setY(n.getY() + n.getVerticalVelocity() * gameData.getDelta());
+            
         }
     }
 }
