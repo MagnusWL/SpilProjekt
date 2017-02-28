@@ -19,16 +19,14 @@ public class PlayerSystem implements IServiceProcessor, IServiceInitializer {
 
             if (gameData.getKeys().isDown(GameKeys.A)) {
                 //left
-                System.out.println("A");
-                entity.setVelocity(-50 * gameData.getDelta());
+                entity.setVelocity(-150);
             }
             if (gameData.getKeys().isDown(GameKeys.D)) {
                 //right
-                System.out.println("D");
-                entity.setVelocity(50 * gameData.getDelta());
+                entity.setVelocity(150);
             }
             if (gameData.getKeys().isDown(GameKeys.SPACE)) {
-                entity.setVerticalVelocity(50);
+                entity.setVerticalVelocity(250);
                 //space
             }
             if (!gameData.getKeys().isDown(GameKeys.A) && !gameData.getKeys().isDown(GameKeys.D)) {

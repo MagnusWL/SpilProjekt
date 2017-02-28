@@ -12,23 +12,31 @@ public class Processor implements IServiceProcessor {
     public void process(GameData gameData, World world) {
         for (Entity map : world.getEntities(EntityType.MAP)) {
             for (Entity entity : world.getEntities(EntityType.PLAYER)) {
-                entity.setShapeX(new float[] {
-                    entity.getX() - 4, 
-                    entity.getX() + 4, 
-                    entity.getX() + 4, 
+                entity.setShapeX(new float[]{
+                    entity.getX() - 4,
+                    entity.getX() + 4,
+                    entity.getX() + 4,
                     entity.getX() - 4});
-                entity.setShapeY(new float[] {
-                    entity.getY() + 4, 
-                    entity.getY() + 4, 
-                    entity.getY() - 4, 
+                entity.setShapeY(new float[]{
+                    entity.getY() + 4,
+                    entity.getY() + 4,
+                    entity.getY() - 4,
                     entity.getY() - 4});
+
+                boolean collidingX = getCollision(entity, map, gameData, entity.getVelocity() * gameData.getDelta(), 0);
                 
-                boolean colliding = getCollision(entity, map, gameData, entity.getVelocity() * gameData.getDelta(), entity.getVerticalVelocity() * gameData.getDelta());
-                if(!colliding)
-                {
+                if (!collidingX) {
                     entity.setX(entity.getX() + entity.getVelocity() * gameData.getDelta());
-                    entity.setY(entity.getY() + entity.getVerticalVelocity() * gameData.getDelta());                            
                 }
+                
+                boolean collidingY = getCollision(entity, map, gameData, 0, entity.getVerticalVelocity() * gameData.getDelta());
+
+                if (!collidingY) {
+                    entity.setY(entity.getY() + entity.getVerticalVelocity() * gameData.getDelta());
+                } else {
+                    
+                }
+
             }
         }
     }
