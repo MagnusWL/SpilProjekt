@@ -13,6 +13,8 @@ public class Processor implements IServiceProcessor {
         for (Entity map : world.getEntities(EntityType.MAP)) {
             for (Entity entity : world.getEntities(EntityType.PLAYER)) {
                 boolean colliding = getCollision(entity, map, gameData);
+                entity.setX(entity.getX() + entity.getVelocity() * gameData.getDelta());
+                entity.setY(entity.getY() + entity.getVerticalVelocity() * gameData.getDelta());
             }
         }
     }
@@ -24,7 +26,7 @@ public class Processor implements IServiceProcessor {
             for (int i = 0; i < shapex.length; i++) {
                 int x = (int) (shapex[i] / gameData.getTileSize());
                 int y = (int) (shapey[i] / gameData.getTileSize());
-                if (x >= 0 && y >= 0 && x < gameData.getMapWidth() && y < gameData.getMapHeight()) {                    
+                if (x >= 0 && y >= 0 && x < gameData.getMapWidth() && y < gameData.getMapHeight()) {
                     if (map.getMap()[x][y] == 0) {
                         return false;
                     } else {
