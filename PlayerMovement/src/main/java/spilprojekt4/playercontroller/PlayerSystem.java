@@ -5,8 +5,10 @@ import spilprojekt4.common.EntityType;
 import spilprojekt4.common.GameData;
 import spilprojekt4.common.GameKeys;
 import spilprojekt4.common.World;
+import spilprojekt4.common.services.ICollisionService;
 import spilprojekt4.common.services.IServiceInitializer;
 import spilprojekt4.common.services.IServiceProcessor;
+import spilprojekt4.util.SPILocator;
 
 public class PlayerSystem implements IServiceProcessor, IServiceInitializer {
 
@@ -32,6 +34,38 @@ public class PlayerSystem implements IServiceProcessor, IServiceInitializer {
             if (!gameData.getKeys().isDown(GameKeys.A) && !gameData.getKeys().isDown(GameKeys.D)) {
                 entity.setVelocity(0);
             }
+            
+                            entity.setShapeX(new float[]{
+                    entity.getX() - 4,
+                    entity.getX() + 4,
+                    entity.getX() + 4,
+                    entity.getX() - 4});
+                entity.setShapeY(new float[]{
+                    entity.getY() + 4,
+                    entity.getY() + 4,
+                    entity.getY() - 4,
+                    entity.getY() - 4});
+                
+                
+                boolean collidingX = false;
+                for(ICollisionService e: SPILocator.locateAll(ICollisionService.class))
+                    collidingX = e.isColliding(world, gameData, entity, entity.getVelocity() * gameData.getDelta(), 0);
+
+
+                if (!collidingX) {
+                    entity.setX(entity.getX() + entity.getVelocity() * gameData.getDelta());
+                }
+
+                boolean collidingY = false;
+                for(ICollisionService e: SPILocator.locateAll(ICollisionService.class))
+                    collidingY = e.isColliding(world, gameData, entity, 0, entity.getVerticalVelocity() * gameData.getDelta());
+
+                if (!collidingY) {
+                    entity.setY(entity.getY() + entity.getVerticalVelocity() * gameData.getDelta());
+                } else {
+
+                }
+
         }
     }
     
