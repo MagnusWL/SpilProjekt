@@ -3,6 +3,7 @@ package spilprojekt4.playercontroller;
 import spilprojekt4.common.Entity;
 import spilprojekt4.common.EntityType;
 import spilprojekt4.common.GameData;
+import spilprojekt4.common.GameKeys;
 import spilprojekt4.common.World;
 import spilprojekt4.common.services.IServiceInitializer;
 import spilprojekt4.common.services.IServiceProcessor;
@@ -16,33 +17,23 @@ public class PlayerSystem implements IServiceProcessor, IServiceInitializer {
 
         for (Entity entity : world.getEntities(EntityType.PLAYER)) {
 
-            if (gameData.getKeys().isDown(1)) {
+            if (gameData.getKeys().isDown(GameKeys.A)) {
                 //left
+                System.out.println("A");
                 entity.setVelocity(-50 * gameData.getDelta());
             }
-            if (gameData.getKeys().isDown(3)) {
+            if (gameData.getKeys().isDown(GameKeys.D)) {
                 //right
+                System.out.println("D");
                 entity.setVelocity(50 * gameData.getDelta());
             }
-            if (gameData.getKeys().isDown(6)) {
+            if (gameData.getKeys().isDown(GameKeys.SPACE)) {
+                entity.setVerticalVelocity(50);
                 //space
-
             }
-            if (!gameData.getKeys().isDown(1) && !gameData.getKeys().isDown(3)) {
+            if (!gameData.getKeys().isDown(GameKeys.A) && !gameData.getKeys().isDown(GameKeys.D)) {
                 entity.setVelocity(0);
             }
-
-            entity.setX(entity.getX() + entity.getVelocity() * gameData.getDelta());
-            entity.setShapeX(new float[] {
-                entity.getX() - 4, 
-                entity.getX() + 4, 
-                entity.getX() + 4, 
-                entity.getX() - 4});
-            entity.setShapeY(new float[] {
-                entity.getY() + 4, 
-                entity.getY() + 4, 
-                entity.getY() - 4, 
-                entity.getY() - 4});
         }
     }
     
