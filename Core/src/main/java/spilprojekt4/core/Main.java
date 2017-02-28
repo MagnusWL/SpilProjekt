@@ -18,7 +18,7 @@ public class Main {
         LwjglApplicationConfiguration cfg
                 = new LwjglApplicationConfiguration();
 
-        cfg.title = "2D shooter game";
+        cfg.title = "Midgårdsormens SexDungeon";
         cfg.width = 1280;
         cfg.height = 720;
         cfg.useGL30 = false;
