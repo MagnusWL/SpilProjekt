@@ -57,8 +57,9 @@ public class Game implements ApplicationListener {
         for(IServiceInitializer i: SPILocator.locateAll(IServiceInitializer.class))
             i.start(gameData, world);
         
-        new InputController(gameData);
-    }
+        Gdx.input.setInputProcessor(
+                new InputController(gameData)
+        );    }
 
     @Override
     public void render() {
