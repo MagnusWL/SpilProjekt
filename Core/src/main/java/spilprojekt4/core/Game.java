@@ -39,6 +39,11 @@ public class Game implements ApplicationListener {
 
     }
 
+    SpriteBatch batch; 
+    Texture texture;
+    Sprite sprite;
+    ShapeRenderer sr;    
+    
     @Override
     public void create() {
         processorList = new ArrayList<>();
@@ -59,17 +64,21 @@ public class Game implements ApplicationListener {
         
         Gdx.input.setInputProcessor(
                 new InputController(gameData)
-        );    }
-
+        );    
+        batch = new SpriteBatch();
+        texture = new Texture(Gdx.files.internal("midgårdsormen.png"));
+        sprite = new Sprite(texture);
+        sr = new ShapeRenderer();
+    }
+    
     @Override
     public void render() {
-        ShapeRenderer sr = new ShapeRenderer();
+        
         // clear screen to black
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         gameData.setDelta(Gdx.graphics.getDeltaTime());
-
         for(IServiceProcessor e: SPILocator.locateAll(IServiceProcessor.class))
             e.process(gameData, world);
         
@@ -94,16 +103,12 @@ public class Game implements ApplicationListener {
         }
 
         for (Entity entity : world.getEntities(EntityType.PLAYER)) {
-            SpriteBatch batch = new SpriteBatch();
-            Texture texture = new Texture(Gdx.files.internal("midgårdsormen.png"));
-            Sprite sprite = new Sprite(texture);
-
+            batch.begin();
             sprite.setX(entity.getX());
             sprite.setY(entity.getY());
-
-            batch.begin();
             sprite.draw(batch);
             batch.end();
+            
 
             /*            
             float[] shapex = entity.getShapeX();
