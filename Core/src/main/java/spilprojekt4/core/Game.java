@@ -95,19 +95,15 @@ public class Game implements ApplicationListener {
                     } else if (map.getMap()[i][j] == 1) {
                         sr.setColor(0.1f, 0.6f, 0.1f, 1f);
                     }
-                    Matrix4 transMatrix = new Matrix4();
-                    transMatrix.trn(-gameData.getCameraX(), -gameData.getCameraY(), 0);
-                    sr.setTransformMatrix(transMatrix);
-//                    sr.translate(gameData.getCameraX(), gameData.getCameraY(), 0);
-                    sr.rect(gameData.getTileSize() * i,
-                            gameData.getTileSize() * j,
+                    sr.rect(gameData.getTileSize() * i - gameData.getCameraX(),
+                            gameData.getTileSize() * j - gameData.getCameraY(),
                             gameData.getTileSize(), gameData.getTileSize());
                 }
             }
             sr.end();
         }
 
-        for (Entity entity : world.getEntities(EntityType.PLAYER)) {
+        for (Entity entity : world.getEntities(EntityType.PLAYER, EntityType.ENEMY, EntityType.BASE)) {
             batch.begin();
             sprite.setX(entity.getX() - gameData.getCameraX());
             sprite.setY(entity.getY() - gameData.getCameraY());
