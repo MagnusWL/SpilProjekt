@@ -63,7 +63,7 @@ public class PlayerSystem implements IServiceProcessor, IServiceInitializer {
                 if (!collidingY) {
                     entity.setY(entity.getY() + entity.getVerticalVelocity() * gameData.getDelta());
                 } else {
-
+                    entity.setVerticalVelocity(0);
                 }
 
         }

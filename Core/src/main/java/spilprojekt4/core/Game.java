@@ -41,11 +41,13 @@ public class Game implements ApplicationListener {
 
     }
 
-    SpriteBatch batch; 
-    Texture texture;
-    Sprite sprite;
-    ShapeRenderer sr;    
-    
+    SpriteBatch batch;
+    Texture playerTexture;
+    Texture enemyTexture;
+    Texture baseTexture;
+    Sprite playerSprite, enemySprite, baseSprite;
+    ShapeRenderer sr;
+
     @Override
     public void create() {
         processorList = new ArrayList<>();
@@ -61,29 +63,35 @@ public class Game implements ApplicationListener {
         cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
         cam.update();
 
-        for(IServiceInitializer i: SPILocator.locateAll(IServiceInitializer.class))
+        for (IServiceInitializer i : SPILocator.locateAll(IServiceInitializer.class)) {
             i.start(gameData, world);
-        
+        }
+
         Gdx.input.setInputProcessor(
                 new InputController(gameData)
-        );    
+        );
         batch = new SpriteBatch();
-        texture = new Texture(Gdx.files.internal("midgårdsormen.png"));
-        sprite = new Sprite(texture);
+        playerTexture = new Texture(Gdx.files.internal("midgårdsormen.png"));
+        playerSprite = new Sprite(playerTexture);
+        enemyTexture = new Texture(Gdx.files.internal("penisenemy.png"));
+        enemySprite = new Sprite(enemyTexture);
+        baseTexture = new Texture(Gdx.files.internal("base.png"));
+        baseSprite = new Sprite(baseTexture);
         sr = new ShapeRenderer();
     }
-    
+
     @Override
     public void render() {
-        
+
         // clear screen to black
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         gameData.setDelta(Gdx.graphics.getDeltaTime());
-        for(IServiceProcessor e: SPILocator.locateAll(IServiceProcessor.class))
+        for (IServiceProcessor e : SPILocator.locateAll(IServiceProcessor.class)) {
             e.process(gameData, world);
-        
+        }
+
         update();
         sr.setAutoShapeType(true);
         for (Entity map : world.getEntities(EntityType.MAP)) {
@@ -103,15 +111,32 @@ public class Game implements ApplicationListener {
             sr.end();
         }
 
-        for (Entity entity : world.getEntities(EntityType.PLAYER, EntityType.ENEMY, EntityType.BASE)) {
+        for (Entity entity : world.getEntities(EntityType.PLAYER)) {
             batch.begin();
-            sprite.setX(entity.getX() - gameData.getCameraX());
-            sprite.setY(entity.getY() - gameData.getCameraY());
-            sprite.draw(batch);
+            playerSprite.setX(entity.getX() - gameData.getCameraX());
+            playerSprite.setY(entity.getY() - gameData.getCameraY());
+            playerSprite.draw(batch);
             batch.end();
-            
+        }
 
-            /*            
+        for (Entity entity : world.getEntities(EntityType.ENEMY)) {
+            batch.begin();
+            enemySprite.setX(entity.getX() - gameData.getCameraX());
+            enemySprite.setY(entity.getY() - gameData.getCameraY());
+            enemySprite.draw(batch);
+            batch.end();
+        }
+
+        for (Entity entity : world.getEntities(EntityType.BASE)) {
+            batch.begin();
+            baseSprite.setX(entity.getX() - gameData.getCameraX());
+            baseSprite.setY(entity.getY() - gameData.getCameraY());
+            baseSprite.draw(batch);
+            batch.end();
+        }
+
+
+        /*            
             float[] shapex = entity.getShapeX();
             float[] shapey = entity.getShapeY();
             if (shapex != null && shapey != null) {
@@ -122,8 +147,6 @@ public class Game implements ApplicationListener {
                 sr.end();
                 }
             }*/
-        }
-
         gameData.getKeys().update();
 
     }
