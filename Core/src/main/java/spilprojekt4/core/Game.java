@@ -14,8 +14,10 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Matrix4;
 import java.util.ArrayList;
 import java.util.List;
+import org.lwjgl.util.vector.Matrix;
 import spilprojekt4.common.Entity;
 import spilprojekt4.common.EntityType;
 import spilprojekt4.common.GameData;
@@ -52,7 +54,7 @@ public class Game implements ApplicationListener {
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
         gameData.setTileSize(16);
-        gameData.setMapWidth(gameData.getDisplayWidth() / gameData.getTileSize());
+        gameData.setMapWidth(gameData.getDisplayWidth() / gameData.getTileSize() * 2);
         gameData.setMapHeight(gameData.getDisplayHeight() / gameData.getTileSize());
 
         cam = new OrthographicCamera(gameData.getDisplayWidth(), gameData.getDisplayHeight());
@@ -93,7 +95,10 @@ public class Game implements ApplicationListener {
                     } else if (map.getMap()[i][j] == 1) {
                         sr.setColor(0.1f, 0.6f, 0.1f, 1f);
                     }
-
+                    Matrix4 transMatrix = new Matrix4();
+                    transMatrix.trn(-gameData.getCameraX(), -gameData.getCameraY(), 0);
+                    sr.setTransformMatrix(transMatrix);
+//                    sr.translate(gameData.getCameraX(), gameData.getCameraY(), 0);
                     sr.rect(gameData.getTileSize() * i,
                             gameData.getTileSize() * j,
                             gameData.getTileSize(), gameData.getTileSize());
@@ -104,8 +109,8 @@ public class Game implements ApplicationListener {
 
         for (Entity entity : world.getEntities(EntityType.PLAYER)) {
             batch.begin();
-            sprite.setX(entity.getX());
-            sprite.setY(entity.getY());
+            sprite.setX(entity.getX() - gameData.getCameraX());
+            sprite.setY(entity.getY() - gameData.getCameraY());
             sprite.draw(batch);
             batch.end();
             

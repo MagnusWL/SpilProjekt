@@ -6,10 +6,28 @@ public class GameData {
     private int displayHeight;
     private int mapWidth;
     private int tileSize;
+    private int cameraX;
+    private int cameraY;
     private final float gravityConstant = -10f;
 
     public float getGravityConstant() {
         return gravityConstant;
+    }
+
+    public int getCameraX() {
+        return cameraX;
+    }
+
+    public void setCameraX(int cameraX) {
+        this.cameraX = cameraX;
+    }
+
+    public int getCameraY() {
+        return cameraY;
+    }
+
+    public void setCameraY(int cameraY) {
+        this.cameraY = cameraY;
     }
 
     public int getTileSize() {
