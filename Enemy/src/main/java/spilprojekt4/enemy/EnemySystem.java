@@ -29,50 +29,25 @@ public class EnemySystem implements IServiceProcessor, IServiceInitializer {
                 }
             }
 
-                entity.setShapeX(new float[]{
-                    entity.getX() - 4,
-                    entity.getX() + 4,
-                    entity.getX() + 4,
-                    entity.getX() - 4});
-                entity.setShapeY(new float[]{
-                    entity.getY() + 4,
-                    entity.getY() + 4,
-                    entity.getY() - 4,
-                    entity.getY() - 4});
-
-                boolean collidingX = false;
-                for (ICollisionService e : SPILocator.locateAll(ICollisionService.class)) {
-                    collidingX = e.isColliding(world, gameData, entity, entity.getVelocity() * gameData.getDelta(), 0);
-                }
-
-                if (!collidingX) {
-                    entity.setX(entity.getX() + entity.getVelocity() * gameData.getDelta());
-                }
-
-                boolean collidingY = false;
-                for (ICollisionService e : SPILocator.locateAll(ICollisionService.class)) {
-                    collidingY = e.isColliding(world, gameData, entity, 0, entity.getVerticalVelocity() * gameData.getDelta());
-                }
-
-                if (!collidingY) {
-                    entity.setY(entity.getY() + entity.getVerticalVelocity() * gameData.getDelta());
-                } else {
-                    entity.setVerticalVelocity(0);
-                }
-
-            }
+            entity.setShapeX(new float[]{
+                entity.getX() - 4,
+                entity.getX() + 4,
+                entity.getX() + 4,
+                entity.getX() - 4});
+            entity.setShapeY(new float[]{
+                entity.getY() + 4,
+                entity.getY() + 4,
+                entity.getY() - 4,
+                entity.getY() - 4});
         }
+    }
 
-        @Override
-        public void start
-        (GameData gameData, World world
-        
-            ) {
+    @Override
+    public void start(GameData gameData, World world
+    ) {
         Entity enemy = createEnemy(gameData, world);
-            world.addEntity(enemy);
-        }
-
-    
+        world.addEntity(enemy);
+    }
 
     private Entity createEnemy(GameData gameData, World world) {
         Entity enemyCharacter = new Entity();
@@ -81,6 +56,8 @@ public class EnemySystem implements IServiceProcessor, IServiceInitializer {
         enemyCharacter.setX((int) (gameData.getDisplayWidth() * 0.9));
         enemyCharacter.setY((int) (gameData.getDisplayHeight() * 0.8));
         enemyCharacter.setHasGravity(true);
+        enemyCharacter.setMaxLife(10);
+        enemyCharacter.setLife(enemyCharacter.getMaxLife());
 
         enemies.add(enemyCharacter);
 

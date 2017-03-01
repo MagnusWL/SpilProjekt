@@ -31,7 +31,9 @@ public class BaseSystem implements IServiceProcessor, IServiceInitializer {
         base.setEntityType(EntityType.BASE);
         base.setX((int) (gameData.getDisplayWidth() * 0.2));
         base.setY((int) (gameData.getDisplayHeight() * 0.51));
-        base.setHasGravity(true);
+        base.setMaxLife(100);
+        base.setLife(base.getMaxLife());
+        base.setHasGravity(false);
 
         base.setShapeX(new float[]{
             base.getX() - 4,

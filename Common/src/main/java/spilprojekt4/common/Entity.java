@@ -10,9 +10,27 @@ public class Entity {
     private float[] shapeY;
     private float velocity;
     private float verticalVelocity;
+    private int life;
+    private int maxLife;
     private boolean hasGravity;
     private UUID ID = UUID.randomUUID();
     private int[][] map;
+
+    public int getLife() {
+        return life;
+    }
+
+    public void setLife(int life) {
+        this.life = life;
+    }
+
+    public int getMaxLife() {
+        return maxLife;
+    }
+
+    public void setMaxLife(int maxLife) {
+        this.maxLife = maxLife;
+    }
 
     public float[] getShapeX() {
         return shapeX;

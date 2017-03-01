@@ -34,55 +34,36 @@ public class PlayerSystem implements IServiceProcessor, IServiceInitializer {
             if (!gameData.getKeys().isDown(GameKeys.A) && !gameData.getKeys().isDown(GameKeys.D)) {
                 entity.setVelocity(0);
             }
-            
-                            entity.setShapeX(new float[]{
-                    entity.getX() - 4,
-                    entity.getX() + 4,
-                    entity.getX() + 4,
-                    entity.getX() - 4});
-                entity.setShapeY(new float[]{
-                    entity.getY() + 4,
-                    entity.getY() + 4,
-                    entity.getY() - 4,
-                    entity.getY() - 4});
-                
-                
-                boolean collidingX = false;
-                for(ICollisionService e: SPILocator.locateAll(ICollisionService.class))
-                    collidingX = e.isColliding(world, gameData, entity, entity.getVelocity() * gameData.getDelta(), 0);
 
-
-                if (!collidingX) {
-                    entity.setX(entity.getX() + entity.getVelocity() * gameData.getDelta());
-                }
-
-                boolean collidingY = false;
-                for(ICollisionService e: SPILocator.locateAll(ICollisionService.class))
-                    collidingY = e.isColliding(world, gameData, entity, 0, entity.getVerticalVelocity() * gameData.getDelta());
-
-                if (!collidingY) {
-                    entity.setY(entity.getY() + entity.getVerticalVelocity() * gameData.getDelta());
-                } else {
-                    entity.setVerticalVelocity(0);
-                }
-
+            entity.setShapeX(new float[]{
+                entity.getX() - 4,
+                entity.getX() + 4,
+                entity.getX() + 4,
+                entity.getX() - 4});
+            entity.setShapeY(new float[]{
+                entity.getY() + 4,
+                entity.getY() + 4,
+                entity.getY() - 4,
+                entity.getY() - 4});
         }
     }
-    
+
     @Override
     public void start(GameData gameData, World world) {
         player = createPlayer(gameData, world);
         world.addEntity(player);
     }
-    
+
     private Entity createPlayer(GameData gameData, World world) {
         Entity playerCharacter = new Entity();
-        
+
         playerCharacter.setEntityType(EntityType.PLAYER);
         playerCharacter.setX((int) (gameData.getDisplayWidth() * 0.5));
         playerCharacter.setY((int) (gameData.getDisplayHeight() * 0.8));
         playerCharacter.setHasGravity(true);
-        
+        playerCharacter.setMaxLife(10);
+        playerCharacter.setLife(playerCharacter.getMaxLife());
+
         return playerCharacter;
     }
 

@@ -93,6 +93,60 @@ public class Game implements ApplicationListener {
         }
 
         update();
+        drawMap();
+        drawSprites();
+        drawHealthBars();
+
+        gameData.getKeys().update();
+    }
+
+    private void drawHealthBars() {
+        sr.setAutoShapeType(true);
+        sr.begin(ShapeType.Filled);
+        
+        for (Entity entity : world.getAllEntities()) {
+            if (entity.getMaxLife() != 0) {
+                sr.setColor(1f, 0f, 0, 1f);
+                sr.rect(entity.getX() - gameData.getCameraX(), entity.getY() - gameData.getCameraY() + 36, 30, 5);
+                sr.setColor(0.0f, 1f, 0, 1f);
+                sr.rect(entity.getX() - gameData.getCameraX(), entity.getY() - gameData.getCameraY() + 36, entity.getLife()/entity.getMaxLife() * 30, 5);
+            }
+        }
+        
+        sr.end();
+    }
+
+    private void drawSprites() {
+        batch.begin();
+        for (Entity entity : world.getEntities(EntityType.BASE)) {
+            drawSprite(entity, baseSprite);
+        }
+
+        for (Entity entity : world.getEntities(EntityType.PLAYER)) {
+            if ((entity.getVelocity() < 0 && !playerSprite.isFlipX()) || (entity.getVelocity() > 0 && playerSprite.isFlipX())) {
+                playerSprite.flip(true, false);
+            }
+
+            drawSprite(entity, playerSprite);
+        }
+
+        for (Entity entity : world.getEntities(EntityType.ENEMY)) {
+            if ((entity.getVelocity() < 0 && !enemySprite.isFlipX()) || (entity.getVelocity() > 0 && enemySprite.isFlipX())) {
+                enemySprite.flip(true, false);
+            }
+
+            drawSprite(entity, enemySprite);
+        }
+        batch.end();
+    }
+
+    private void drawSprite(Entity e, Sprite sprite) {
+        sprite.setX(e.getX() - gameData.getCameraX());
+        sprite.setY(e.getY() - gameData.getCameraY());
+        sprite.draw(batch);
+    }
+
+    private void drawMap() {
         sr.setAutoShapeType(true);
         for (Entity map : world.getEntities(EntityType.MAP)) {
             sr.begin(ShapeType.Filled);
@@ -110,45 +164,6 @@ public class Game implements ApplicationListener {
             }
             sr.end();
         }
-
-        for (Entity entity : world.getEntities(EntityType.PLAYER)) {
-            batch.begin();
-            playerSprite.setX(entity.getX() - gameData.getCameraX());
-            playerSprite.setY(entity.getY() - gameData.getCameraY());
-            playerSprite.draw(batch);
-            batch.end();
-        }
-
-        for (Entity entity : world.getEntities(EntityType.ENEMY)) {
-            batch.begin();
-            enemySprite.setX(entity.getX() - gameData.getCameraX());
-            enemySprite.setY(entity.getY() - gameData.getCameraY());
-            enemySprite.draw(batch);
-            batch.end();
-        }
-
-        for (Entity entity : world.getEntities(EntityType.BASE)) {
-            batch.begin();
-            baseSprite.setX(entity.getX() - gameData.getCameraX());
-            baseSprite.setY(entity.getY() - gameData.getCameraY());
-            baseSprite.draw(batch);
-            batch.end();
-        }
-
-
-        /*            
-            float[] shapex = entity.getShapeX();
-            float[] shapey = entity.getShapeY();
-            if (shapex != null && shapey != null) {
-                sr.setColor(Color.RED);
-                sr.begin(ShapeType.Filled);        
-                for (int i = 0, j = shapex.length - 1; i < shapex.length; j = i++) {
-                    sr.line(shapex[i], shapey[i], shapex[j], shapey[j]);
-                sr.end();
-                }
-            }*/
-        gameData.getKeys().update();
-
     }
 
     private void update() {
