@@ -26,17 +26,19 @@ import spilprojekt4.common.util.SPILocator;
  */
 public class WeaponSystem implements IServiceProcessor, IServiceInitializer {
 
-    HashMap<String, Entity> weapons;
+    private HashMap<String, Entity> weapons = new HashMap<>();
 
     @Override
     public void process(GameData gameData, World world) {
+
+        System.out.println(weapons.entrySet().size());
         for (Entry e : weapons.entrySet()) {
             Entity carrier = world.getEntity((String) e.getKey());
             ((Entity) e.getValue()).setX(carrier.getX());
             ((Entity) e.getValue()).setY(carrier.getY());
-            
-            if(((Entity) e.getValue()).getEntityType() == EntityType.PLAYER && gameData.getKeys().isDown(GameKeys.S))
-                gameData.addEvent(new Event(EventType.PLAYER_SHOOT, ((Entity) e.getValue()).getID()));                
+            if (((Entity) e.getValue()).getEntityType() == EntityType.PLAYER && gameData.getKeys().isDown(GameKeys.S)) {
+                gameData.addEvent(new Event(EventType.PLAYER_SHOOT, ((Entity) e.getValue()).getID()));
+            }
         }
     }
 
@@ -45,12 +47,12 @@ public class WeaponSystem implements IServiceProcessor, IServiceInitializer {
         weapon.setEntityType(EntityType.WEAPON);
         weapon.setSprite("gun");
         weapons.put(e.getID(), weapon);
+        System.out.println("eee");
         world.addEntity(weapon);
     }
 
     @Override
     public void start(GameData gameData, World world) {
-        weapons = new HashMap<>();
         for (Entity player : world.getEntities(EntityType.PLAYER)) {
             createGun(gameData, world, player);
         }
@@ -58,6 +60,7 @@ public class WeaponSystem implements IServiceProcessor, IServiceInitializer {
 
     @Override
     public void stop(GameData gameData, World world) {
+        System.out.println("ty");
         for (Entity e : weapons.values()) {
             world.removeEntity(e);
         }

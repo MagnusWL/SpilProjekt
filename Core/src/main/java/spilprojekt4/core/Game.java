@@ -78,6 +78,8 @@ public class Game implements ApplicationListener {
         spriteMap.put("base", new Sprite(tex));
         tex = new Texture(Gdx.files.internal("gun.png"));
         spriteMap.put("gun", new Sprite(tex));
+        tex = new Texture(Gdx.files.internal("bullet.png"));
+        spriteMap.put("bullet", new Sprite(tex));
         sr = new ShapeRenderer();
     }
 
@@ -123,7 +125,7 @@ public class Game implements ApplicationListener {
 
     private void drawSprites() {
         batch.begin();
-        for (Entity entity : world.getEntities(EntityType.BASE)) {
+        for (Entity entity : world.getEntities(EntityType.BASE, EntityType.PROJECTILE)) {
             drawSprite(entity, spriteMap.get(entity.getSprite()), false);
         }
 

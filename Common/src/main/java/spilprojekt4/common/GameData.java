@@ -13,6 +13,8 @@ public class GameData {
     private int tileSize;
     private int cameraX;
     private int cameraY;
+    private int mouseX;
+    private int mouseY;
     private final float gravityConstant = -10f;
     private List<Event> events = new ArrayList<>();
 
@@ -32,6 +34,30 @@ public class GameData {
 
     public float getGravityConstant() {
         return gravityConstant;
+    }
+
+    public int getMouseX() {
+        return mouseX;
+    }
+
+    public void setMouseX(int mouseX) {
+        this.mouseX = mouseX;
+    }
+
+    public int getMouseY() {
+        return mouseY;
+    }
+
+    public void setMouseY(int mouseY) {
+        this.mouseY = mouseY;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 
     public int getCameraX() {
