@@ -23,9 +23,9 @@ public class EnemySystem implements IServiceProcessor, IServiceInitializer {
 
             for (Entity player : world.getEntities(EntityType.PLAYER)) {
                 if (player.getX() > entity.getX()) {
-                    entity.setVelocity(85);
+                    entity.setVelocity(entity.getMovementSpeed());
                 } else {
-                    entity.setVelocity(-85);
+                    entity.setVelocity(-entity.getMovementSpeed());
                 }
             }
 
@@ -58,6 +58,8 @@ public class EnemySystem implements IServiceProcessor, IServiceInitializer {
         enemyCharacter.setHasGravity(true);
         enemyCharacter.setMaxLife(10);
         enemyCharacter.setLife(enemyCharacter.getMaxLife());
+        enemyCharacter.setJumpSpeed(300);
+        enemyCharacter.setMovementSpeed(85);
 
         enemies.add(enemyCharacter);
 
