@@ -16,6 +16,7 @@
         <module>Enemy</module>
         <module>Base</module>
         <module>Movement</module>
+        <module>Weapon</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
