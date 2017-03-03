@@ -1,5 +1,5 @@
 package spilprojekt4.common;
 
 public enum EntityType {
-    PLAYER, MAP, ENEMY, BASE;
+    PLAYER, MAP, ENEMY, BASE, WEAPON, PROJECTILE;
 }
