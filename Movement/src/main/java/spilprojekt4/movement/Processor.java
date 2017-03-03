@@ -12,7 +12,7 @@ public class Processor implements IServiceProcessor {
 
     @Override
     public void process(GameData gameData, World world) {
-        for (Entity entity : world.getEntities(EntityType.PLAYER, EntityType.ENEMY)) {
+        for (Entity entity : world.getEntities(EntityType.PLAYER, EntityType.ENEMY, EntityType.PROJECTILE)) {
             boolean collidingX = false;
             for (ICollisionService e : SPILocator.locateAll(ICollisionService.class)) {
                 collidingX = e.isColliding(world, gameData, entity, entity.getVelocity() * gameData.getDelta(), 0);
