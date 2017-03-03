@@ -16,7 +16,9 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Matrix4;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.lwjgl.util.vector.Matrix;
 import spilprojekt4.common.Entity;
 import spilprojekt4.common.EntityType;
@@ -42,10 +44,7 @@ public class Game implements ApplicationListener {
     }
 
     SpriteBatch batch;
-    Texture playerTexture;
-    Texture enemyTexture;
-    Texture baseTexture;
-    Sprite playerSprite, enemySprite, baseSprite;
+    Map<String, Sprite> spriteMap = new HashMap<>();
     ShapeRenderer sr;
 
     @Override
@@ -71,12 +70,12 @@ public class Game implements ApplicationListener {
                 new InputController(gameData)
         );
         batch = new SpriteBatch();
-        playerTexture = new Texture(Gdx.files.internal("midgårdsormen.png"));
-        playerSprite = new Sprite(playerTexture);
-        enemyTexture = new Texture(Gdx.files.internal("penisenemy.png"));
-        enemySprite = new Sprite(enemyTexture);
-        baseTexture = new Texture(Gdx.files.internal("base.png"));
-        baseSprite = new Sprite(baseTexture);
+        Texture tex = new Texture(Gdx.files.internal("midgårdsormen.png"));
+        spriteMap.put("midgårdsormen", new Sprite(tex));
+        tex = new Texture(Gdx.files.internal("penisenemy.png"));
+        spriteMap.put("penisenemy", new Sprite(tex));
+        tex = new Texture(Gdx.files.internal("base.png"));
+        spriteMap.put("base", new Sprite(tex));
         sr = new ShapeRenderer();
     }
 
@@ -103,46 +102,44 @@ public class Game implements ApplicationListener {
     private void drawHealthBars() {
         sr.setAutoShapeType(true);
         sr.begin(ShapeType.Filled);
-        
+        int healthOffset;
+        int healthWidth;
+
         for (Entity entity : world.getAllEntities()) {
             if (entity.getMaxLife() != 0) {
+                healthOffset = (int) spriteMap.get(entity.getSprite()).getHeight() + 5;
+                healthWidth = (int) spriteMap.get(entity.getSprite()).getWidth();
                 sr.setColor(1f, 0f, 0, 1f);
-                sr.rect(entity.getX() - gameData.getCameraX(), entity.getY() - gameData.getCameraY() + 36, 30, 5);
+                sr.rect(entity.getX() - gameData.getCameraX(), entity.getY() - gameData.getCameraY() + healthOffset, healthWidth, 5);
                 sr.setColor(0.0f, 1f, 0, 1f);
-                sr.rect(entity.getX() - gameData.getCameraX(), entity.getY() - gameData.getCameraY() + 36, entity.getLife()/entity.getMaxLife() * 30, 5);
+                sr.rect(entity.getX() - gameData.getCameraX(), entity.getY() - gameData.getCameraY() + healthOffset, entity.getLife() / entity.getMaxLife() * healthWidth, 5);
             }
         }
-        
+
         sr.end();
     }
 
     private void drawSprites() {
         batch.begin();
         for (Entity entity : world.getEntities(EntityType.BASE)) {
-            drawSprite(entity, baseSprite);
+            drawSprite(entity, spriteMap.get(entity.getSprite()), false);
         }
 
-        for (Entity entity : world.getEntities(EntityType.PLAYER)) {
-            if ((entity.getVelocity() < 0 && !playerSprite.isFlipX()) || (entity.getVelocity() > 0 && playerSprite.isFlipX())) {
-                playerSprite.flip(true, false);
-            }
-
-            drawSprite(entity, playerSprite);
-        }
-
-        for (Entity entity : world.getEntities(EntityType.ENEMY)) {
-            if ((entity.getVelocity() < 0 && !enemySprite.isFlipX()) || (entity.getVelocity() > 0 && enemySprite.isFlipX())) {
-                enemySprite.flip(true, false);
-            }
-
-            drawSprite(entity, enemySprite);
+        for (Entity entity : world.getEntities(EntityType.PLAYER, EntityType.ENEMY)) {
+            drawSprite(entity, spriteMap.get(entity.getSprite()), true);
         }
         batch.end();
     }
 
-    private void drawSprite(Entity e, Sprite sprite) {
-        sprite.setX(e.getX() - gameData.getCameraX());
-        sprite.setY(e.getY() - gameData.getCameraY());
+    private void drawSprite(Entity entity, Sprite sprite, boolean flip) {
+        if (flip) {
+            if ((entity.getVelocity() < 0 && !sprite.isFlipX()) || (entity.getVelocity() > 0 && sprite.isFlipX())) {
+                sprite.flip(true, false);
+            }
+        }
+
+        sprite.setX(entity.getX() - gameData.getCameraX());
+        sprite.setY(entity.getY() - gameData.getCameraY());
         sprite.draw(batch);
     }
 

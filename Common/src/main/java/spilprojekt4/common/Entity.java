@@ -8,6 +8,7 @@ public class Entity {
     private float y;
     private float[] shapeX;
     private float[] shapeY;
+    private String sprite;
     private float movementSpeed;
     private float jumpSpeed;
     private float velocity;
@@ -17,6 +18,14 @@ public class Entity {
     private boolean hasGravity;
     private UUID ID = UUID.randomUUID();
     private int[][] map;
+
+    public String getSprite() {
+        return sprite;
+    }
+
+    public void setSprite(String sprite) {
+        this.sprite = sprite;
+    }
 
     public float getMovementSpeed() {
         return movementSpeed;

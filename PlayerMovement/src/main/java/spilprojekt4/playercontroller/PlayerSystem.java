@@ -68,6 +68,7 @@ public class PlayerSystem implements IServiceProcessor, IServiceInitializer {
         playerCharacter.setLife(playerCharacter.getMaxLife());
         playerCharacter.setJumpSpeed(400);
         playerCharacter.setMovementSpeed(150);
+        playerCharacter.setSprite("midgårdsormen");
         
         return playerCharacter;
     }

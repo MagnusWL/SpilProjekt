@@ -60,6 +60,7 @@ public class EnemySystem implements IServiceProcessor, IServiceInitializer {
         enemyCharacter.setLife(enemyCharacter.getMaxLife());
         enemyCharacter.setJumpSpeed(300);
         enemyCharacter.setMovementSpeed(85);
+        enemyCharacter.setSprite("penisenemy");
 
         enemies.add(enemyCharacter);
 
