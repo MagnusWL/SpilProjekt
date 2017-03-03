@@ -19,6 +19,11 @@ public class World {
         return r;
     }
     
+    public Entity getEntity(String id)
+    {
+        return entityMap.get(id);
+    }
+    
     public Collection<Entity> getAllEntities() {
         return entityMap.values();
     }

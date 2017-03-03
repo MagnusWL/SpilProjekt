@@ -76,6 +76,8 @@ public class Game implements ApplicationListener {
         spriteMap.put("penisenemy", new Sprite(tex));
         tex = new Texture(Gdx.files.internal("base.png"));
         spriteMap.put("base", new Sprite(tex));
+        tex = new Texture(Gdx.files.internal("gun.png"));
+        spriteMap.put("gun", new Sprite(tex));
         sr = new ShapeRenderer();
     }
 

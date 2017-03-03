@@ -1,6 +1,11 @@
 package spilprojekt4.common;
 
+import java.util.ArrayList;
+import java.util.List;
+import spilprojekt4.common.events.Event;
+
 public class GameData {
+
     private float delta;
     private int displayWidth;
     private int displayHeight;
@@ -9,6 +14,21 @@ public class GameData {
     private int cameraX;
     private int cameraY;
     private final float gravityConstant = -10f;
+    private List<Event> events = new ArrayList<>();
+
+    public List<Event> getAllEvents() {
+        return events;
+    }
+    
+    public void removeEvent(Event e)
+    {
+        events.remove(e);
+    }
+    
+    public void addEvent(Event e)
+    {
+        events.add(e);
+    }
 
     public float getGravityConstant() {
         return gravityConstant;
@@ -39,7 +59,6 @@ public class GameData {
     }
     private int mapHeight;
     private final GameKeys keys = new GameKeys();
-
 
     public GameKeys getKeys() {
         return keys;
