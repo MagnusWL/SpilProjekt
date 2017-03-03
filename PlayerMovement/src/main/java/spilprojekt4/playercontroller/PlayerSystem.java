@@ -21,16 +21,19 @@ public class PlayerSystem implements IServiceProcessor, IServiceInitializer {
 
             if (gameData.getKeys().isDown(GameKeys.A)) {
                 //left
-                entity.setVelocity(-150);
+                entity.setVelocity(-entity.getMovementSpeed());
             }
             if (gameData.getKeys().isDown(GameKeys.D)) {
                 //right
-                entity.setVelocity(150);
+                entity.setVelocity(entity.getMovementSpeed());
             }
+            
             if (gameData.getKeys().isDown(GameKeys.SPACE)) {
-                entity.setVerticalVelocity(250);
-                //space
+                for(ICollisionService e: SPILocator.locateAll(ICollisionService.class))
+                    if(e.isColliding(world, gameData, entity, 0, -2))
+                        entity.setVerticalVelocity(entity.getJumpSpeed());                        
             }
+            
             if (!gameData.getKeys().isDown(GameKeys.A) && !gameData.getKeys().isDown(GameKeys.D)) {
                 entity.setVelocity(0);
             }
@@ -63,7 +66,9 @@ public class PlayerSystem implements IServiceProcessor, IServiceInitializer {
         playerCharacter.setHasGravity(true);
         playerCharacter.setMaxLife(10);
         playerCharacter.setLife(playerCharacter.getMaxLife());
-
+        playerCharacter.setJumpSpeed(400);
+        playerCharacter.setMovementSpeed(150);
+        
         return playerCharacter;
     }
 

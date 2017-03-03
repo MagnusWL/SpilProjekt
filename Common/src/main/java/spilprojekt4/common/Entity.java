@@ -8,6 +8,8 @@ public class Entity {
     private float y;
     private float[] shapeX;
     private float[] shapeY;
+    private float movementSpeed;
+    private float jumpSpeed;
     private float velocity;
     private float verticalVelocity;
     private int life;
@@ -15,6 +17,22 @@ public class Entity {
     private boolean hasGravity;
     private UUID ID = UUID.randomUUID();
     private int[][] map;
+
+    public float getMovementSpeed() {
+        return movementSpeed;
+    }
+
+    public void setMovementSpeed(float movementSpeed) {
+        this.movementSpeed = movementSpeed;
+    }
+
+    public float getJumpSpeed() {
+        return jumpSpeed;
+    }
+
+    public void setJumpSpeed(float jumpSpeed) {
+        this.jumpSpeed = jumpSpeed;
+    }
 
     public int getLife() {
         return life;
