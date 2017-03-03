@@ -129,7 +129,7 @@ public class Game implements ApplicationListener {
             drawSprite(entity, spriteMap.get(entity.getSprite()), false);
         }
 
-        for (Entity entity : world.getEntities(EntityType.PLAYER, EntityType.ENEMY)) {
+        for (Entity entity : world.getEntities(EntityType.PLAYER, EntityType.ENEMY, EntityType.WEAPON)) {
             drawSprite(entity, spriteMap.get(entity.getSprite()), true);
         }
         batch.end();
