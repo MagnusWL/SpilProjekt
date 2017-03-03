@@ -13,6 +13,7 @@ public class Processor implements IServiceProcessor {
     @Override
     public void process(GameData gameData, World world) {
         for (Entity entity : world.getEntities(EntityType.PLAYER, EntityType.ENEMY, EntityType.PROJECTILE)) {
+            
             boolean collidingX = false;
             for (ICollisionService e : SPILocator.locateAll(ICollisionService.class)) {
                 collidingX = e.isColliding(world, gameData, entity, entity.getVelocity() * gameData.getDelta(), 0);
@@ -20,6 +21,10 @@ public class Processor implements IServiceProcessor {
 
             if (!collidingX) {
                 entity.setX(entity.getX() + entity.getVelocity() * gameData.getDelta());
+            }
+            else if(entity.getEntityType() == EntityType.PROJECTILE)
+            {
+                world.removeEntity(entity);
             }
 
             boolean collidingY = false;
@@ -31,6 +36,10 @@ public class Processor implements IServiceProcessor {
                 entity.setY(entity.getY() + entity.getVerticalVelocity() * gameData.getDelta());
             } else {
                 entity.setVerticalVelocity(0);
+
+                if(entity.getEntityType() == EntityType.PROJECTILE)
+                    world.removeEntity(entity);
+
             }
         }
     }

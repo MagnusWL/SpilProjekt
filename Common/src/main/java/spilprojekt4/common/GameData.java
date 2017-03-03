@@ -2,6 +2,7 @@ package spilprojekt4.common;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import spilprojekt4.common.events.Event;
 
 public class GameData {
@@ -16,7 +17,7 @@ public class GameData {
     private int mouseX;
     private int mouseY;
     private final float gravityConstant = -10f;
-    private List<Event> events = new ArrayList<>();
+    private List<Event> events = new CopyOnWriteArrayList<>();
 
     public List<Event> getAllEvents() {
         return events;

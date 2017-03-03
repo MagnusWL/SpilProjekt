@@ -65,7 +65,7 @@ public class Game implements ApplicationListener {
         for (IServiceInitializer i : SPILocator.locateAll(IServiceInitializer.class)) {
             i.start(gameData, world);
         }
-
+        
         Gdx.input.setInputProcessor(
                 new InputController(gameData)
         );
@@ -168,6 +168,9 @@ public class Game implements ApplicationListener {
     }
 
     private void update() {
+        gameData.setMouseX(Gdx.input.getX());
+        gameData.setMouseY(gameData.getDisplayHeight() - Gdx.input.getY());
+
         for (IServiceProcessor e : processorList) {
             e.process(gameData, world);
         }

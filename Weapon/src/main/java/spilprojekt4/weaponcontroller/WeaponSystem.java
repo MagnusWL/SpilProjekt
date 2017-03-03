@@ -26,17 +26,14 @@ import spilprojekt4.common.util.SPILocator;
  */
 public class WeaponSystem implements IServiceProcessor, IServiceInitializer {
 
-    private HashMap<String, Entity> weapons = new HashMap<>();
-
     @Override
     public void process(GameData gameData, World world) {
-
-        System.out.println(weapons.entrySet().size());
-        for (Entry e : weapons.entrySet()) {
+       for (Entry e : world.getWeapons().entrySet()) {
             Entity carrier = world.getEntity((String) e.getKey());
             ((Entity) e.getValue()).setX(carrier.getX());
             ((Entity) e.getValue()).setY(carrier.getY());
-            if (((Entity) e.getValue()).getEntityType() == EntityType.PLAYER && gameData.getKeys().isDown(GameKeys.S)) {
+            
+            if (((Entity) world.getEntity((String) e.getKey())).getEntityType() == EntityType.PLAYER && gameData.getKeys().isDown(GameKeys.S)) {
                 gameData.addEvent(new Event(EventType.PLAYER_SHOOT, ((Entity) e.getValue()).getID()));
             }
         }
@@ -46,8 +43,7 @@ public class WeaponSystem implements IServiceProcessor, IServiceInitializer {
         Entity weapon = new Entity();
         weapon.setEntityType(EntityType.WEAPON);
         weapon.setSprite("gun");
-        weapons.put(e.getID(), weapon);
-        System.out.println("eee");
+        world.getWeapons().put(e.getID(), weapon);
         world.addEntity(weapon);
     }
 
@@ -60,10 +56,8 @@ public class WeaponSystem implements IServiceProcessor, IServiceInitializer {
 
     @Override
     public void stop(GameData gameData, World world) {
-        System.out.println("ty");
-        for (Entity e : weapons.values()) {
+        for (Entity e : world.getWeapons().values()) {
             world.removeEntity(e);
         }
     }
-
 }

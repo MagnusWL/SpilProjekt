@@ -3,6 +3,7 @@ package spilprojekt4.common;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -10,6 +11,15 @@ import java.util.concurrent.ConcurrentHashMap;
 public class World {
 
     private final Map<String, Entity> entityMap = new ConcurrentHashMap<>();
+    private HashMap<String, Entity> weapons = new HashMap<>();
+
+    public HashMap<String, Entity> getWeapons() {
+        return weapons;
+    }
+
+    public void setWeapons(HashMap<String, Entity> weapons) {
+        this.weapons = weapons;
+    }
 
     public List<Entity> getEntities(EntityType... entityTypes) {
         List<Entity> r = new ArrayList<>();
