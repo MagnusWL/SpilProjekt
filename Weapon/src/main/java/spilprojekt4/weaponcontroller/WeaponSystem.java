@@ -5,7 +5,7 @@
  */
 
 
-package spilprojekt4.weapon;
+package spilprojekt4.weaponcontroller;
 
 import spilprojekt4.common.Entity;
 import spilprojekt4.common.EntityType;
@@ -20,7 +20,7 @@ import spilprojekt4.common.util.SPILocator;
  *
  * @author burno
  */
-public class Weaponsystem implements IServiceProcessor, IServiceInitializer {
+public class WeaponSystem implements IServiceProcessor, IServiceInitializer {
 
     @Override
     public void process(GameData gameData, World world) {
