@@ -108,7 +108,7 @@ public class Game implements ApplicationListener {
         sr.begin(ShapeType.Filled);
         int healthOffset;
         int healthWidth;
-
+        
         for (Entity entity : world.getAllEntities()) {
             if (entity.getMaxLife() != 0) {
                 healthOffset = (int) spriteMap.get(entity.getSprite()).getHeight() + 5;
@@ -116,10 +116,9 @@ public class Game implements ApplicationListener {
                 sr.setColor(1f, 0f, 0, 1f);
                 sr.rect(entity.getX() - gameData.getCameraX(), entity.getY() - gameData.getCameraY() + healthOffset, healthWidth, 5);
                 sr.setColor(0.0f, 1f, 0, 1f);
-                sr.rect(entity.getX() - gameData.getCameraX(), entity.getY() - gameData.getCameraY() + healthOffset, entity.getLife() / entity.getMaxLife() * healthWidth, 5);
+                sr.rect(entity.getX() - gameData.getCameraX(), entity.getY() - gameData.getCameraY() + healthOffset, ((float)entity.getLife() / (float)entity.getMaxLife()) * healthWidth, 5);
             }
         }
-
         sr.end();
     }
 

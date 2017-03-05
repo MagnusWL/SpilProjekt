@@ -15,4 +15,5 @@ import spilprojekt4.common.World;
  */
 public interface ICollisionService {
     public boolean isColliding(World world, GameData gameData, Entity entity, float moveX, float moveY);
+    public boolean isEntitiesColliding(World world, GameData gameData, Entity entity1, Entity entity2);
 }

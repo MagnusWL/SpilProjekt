@@ -1,7 +1,9 @@
 package spilprojekt4.common;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import spilprojekt4.common.events.Event;
 

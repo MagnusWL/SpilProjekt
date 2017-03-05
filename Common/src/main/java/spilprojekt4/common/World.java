@@ -11,9 +11,9 @@ import java.util.concurrent.ConcurrentHashMap;
 public class World {
 
     private final Map<String, Entity> entityMap = new ConcurrentHashMap<>();
-    private HashMap<String, Entity> weapons = new HashMap<>();
+    private Map<String, Entity> weapons = new ConcurrentHashMap<>();
 
-    public HashMap<String, Entity> getWeapons() {
+    public Map<String, Entity> getWeapons() {
         return weapons;
     }
 

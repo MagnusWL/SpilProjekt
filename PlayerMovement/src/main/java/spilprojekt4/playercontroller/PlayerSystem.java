@@ -5,6 +5,8 @@ import spilprojekt4.common.EntityType;
 import spilprojekt4.common.GameData;
 import spilprojekt4.common.GameKeys;
 import spilprojekt4.common.World;
+import spilprojekt4.common.events.Event;
+import spilprojekt4.common.events.EventType;
 import spilprojekt4.common.services.ICollisionService;
 import spilprojekt4.common.services.IServiceInitializer;
 import spilprojekt4.common.services.IServiceProcessor;
@@ -27,27 +29,28 @@ public class PlayerSystem implements IServiceProcessor, IServiceInitializer {
                 //right
                 entity.setVelocity(entity.getMovementSpeed());
             }
-            
+
             if (gameData.getKeys().isDown(GameKeys.SPACE)) {
-                for(ICollisionService e: SPILocator.locateAll(ICollisionService.class))
-                    if(e.isColliding(world, gameData, entity, 0, -2))
-                        entity.setVerticalVelocity(entity.getJumpSpeed());                        
+                for (ICollisionService e : SPILocator.locateAll(ICollisionService.class)) {
+                    if (e.isColliding(world, gameData, entity, 0, -2)) {
+                        entity.setVerticalVelocity(entity.getJumpSpeed());
+                    }
+                }
             }
-            
+
             if (!gameData.getKeys().isDown(GameKeys.A) && !gameData.getKeys().isDown(GameKeys.D)) {
                 entity.setVelocity(0);
             }
 
-            entity.setShapeX(new float[]{
-                entity.getX() - 4,
-                entity.getX() + 4,
-                entity.getX() + 4,
-                entity.getX() - 4});
-            entity.setShapeY(new float[]{
-                entity.getY() + 4,
-                entity.getY() + 4,
-                entity.getY() - 4,
-                entity.getY() - 4});
+            for (Event e : gameData.getAllEvents()) {
+                if (e.getType() == EventType.ENTITY_HIT && world.getEntity(e.getEntityID()).equals(entity.getID())) {
+                    entity.setLife(entity.getLife() - 1);
+                    if (entity.getLife() <= 0) {
+                        world.removeEntity(entity);
+                    }
+                    gameData.removeEvent(e);
+                }
+            }
         }
     }
 
@@ -69,12 +72,14 @@ public class PlayerSystem implements IServiceProcessor, IServiceInitializer {
         playerCharacter.setJumpSpeed(400);
         playerCharacter.setMovementSpeed(150);
         playerCharacter.setSprite("midgårdsormen");
-        
+        playerCharacter.setShapeX(new float[]{5, 25, 25, 5});
+        playerCharacter.setShapeY(new float[]{25, 25, 2, 2});
+
         return playerCharacter;
     }
 
     @Override
     public void stop(GameData gameData, World world) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        world.removeEntity(player);
     }
 }

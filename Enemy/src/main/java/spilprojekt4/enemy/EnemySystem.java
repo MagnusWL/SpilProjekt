@@ -7,6 +7,8 @@ import spilprojekt4.common.EntityType;
 import spilprojekt4.common.GameData;
 import spilprojekt4.common.GameKeys;
 import spilprojekt4.common.World;
+import spilprojekt4.common.events.Event;
+import spilprojekt4.common.events.EventType;
 import spilprojekt4.common.services.ICollisionService;
 import spilprojekt4.common.services.IServiceInitializer;
 import spilprojekt4.common.services.IServiceProcessor;
@@ -29,31 +31,33 @@ public class EnemySystem implements IServiceProcessor, IServiceInitializer {
                 }
             }
 
-            entity.setShapeX(new float[]{
-                entity.getX() - 4,
-                entity.getX() + 4,
-                entity.getX() + 4,
-                entity.getX() - 4});
-            entity.setShapeY(new float[]{
-                entity.getY() + 4,
-                entity.getY() + 4,
-                entity.getY() - 4,
-                entity.getY() - 4});
+            for (Event e : gameData.getAllEvents()) {
+                if (e.getType() == EventType.ENTITY_HIT && e.getEntityID().equals(entity.getID())) {
+
+                    entity.setLife(entity.getLife() - 1);
+                    if (entity.getLife() <= 0) {
+                        world.removeEntity(entity);
+                    }
+
+                    gameData.removeEvent(e);
+                }
+            }
         }
     }
 
     @Override
-    public void start(GameData gameData, World world
-    ) {
-        Entity enemy = createEnemy(gameData, world);
-        world.addEntity(enemy);
+    public void start(GameData gameData, World world) {
+        for (int i = 0; i < 10; i++) {
+            Entity enemy = createEnemy(gameData, world);
+            world.addEntity(enemy);
+        }
     }
 
     private Entity createEnemy(GameData gameData, World world) {
         Entity enemyCharacter = new Entity();
 
         enemyCharacter.setEntityType(EntityType.ENEMY);
-        enemyCharacter.setX((int) (gameData.getDisplayWidth() * 0.9));
+        enemyCharacter.setX((int) (gameData.getDisplayWidth() * Math.random()));
         enemyCharacter.setY((int) (gameData.getDisplayHeight() * 0.8));
         enemyCharacter.setHasGravity(true);
         enemyCharacter.setMaxLife(10);
@@ -61,6 +65,8 @@ public class EnemySystem implements IServiceProcessor, IServiceInitializer {
         enemyCharacter.setJumpSpeed(300);
         enemyCharacter.setMovementSpeed(85);
         enemyCharacter.setSprite("penisenemy");
+        enemyCharacter.setShapeX(new float[]{5, 25, 25, 5});
+        enemyCharacter.setShapeY(new float[]{25, 25, 2, 2});
 
         enemies.add(enemyCharacter);
 

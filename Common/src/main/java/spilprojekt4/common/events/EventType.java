@@ -10,5 +10,5 @@ package spilprojekt4.common.events;
  * @author lars
  */
 public enum EventType {
-    PLAYER_SHOOT;
+    PLAYER_SHOOT, ENTITY_HIT;
 }

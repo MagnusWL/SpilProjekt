@@ -21,7 +21,7 @@ import spilprojekt4.common.events.EventType;
  * @author burno
  */
 public class BulletSystem implements IServiceProcessor, IServiceInitializer {
-    
+
     private ArrayList<Entity> bullets = new ArrayList<>();
 
     private Entity createBullet(Entity entity, GameData gameData, World world, float angle) {
@@ -30,43 +30,22 @@ public class BulletSystem implements IServiceProcessor, IServiceInitializer {
         bullet.setVelocity((float) (1000 * Math.cos(angle)));
         bullet.setVerticalVelocity((float) (1000 * Math.sin(angle)));
         bullet.setSprite("bullet");
-        bullet.setX(entity.getX() + ((float) Math.cos(angle)));
-        bullet.setY(entity.getY() + ((float) Math.sin(angle)));
+        bullet.setX(entity.getX() + 15 + ((float) Math.cos(angle) * 15));
+        bullet.setY(entity.getY() + 15 + ((float) Math.sin(angle) * 15));
+        bullet.setShapeX(new float[]{0, 2, 2, 0});
+        bullet.setShapeY(new float[]{2, 2, 0, 0});
+
         bullets.add(bullet);
         return bullet;
     }
 
-    private void setBulletShape(World world) {
-        for (Entity bullet : world.getEntities(EntityType.PROJECTILE)) {
-
-            bullet.setShapeX(new float[]{
-                bullet.getX() - 1,
-                bullet.getX() + 1,
-                bullet.getX() + 1,
-                bullet.getX() - 1});
-            bullet.setShapeY(new float[]{
-                bullet.getY() + 1,
-                bullet.getY() + 1,
-                bullet.getY() - 1,
-                bullet.getY() - 1});
-        }
-    }
-
     @Override
     public void process(GameData gameData, World world) {
-
-        setBulletShape(world);
-
         for (Event e : gameData.getAllEvents()) {
-
             if (e.getType() == EventType.PLAYER_SHOOT) {
-
                 Entity player = world.getEntity(e.getEntityID());
-
-                float angle = (float) Math.atan2(gameData.getMouseY() - (player.getY() - gameData.getCameraY()), gameData.getMouseX() - (player.getX() - gameData.getCameraX()));
-
+                float angle = (float) Math.atan2(gameData.getMouseY() - (player.getY() + 15 - gameData.getCameraY()), gameData.getMouseX() - (player.getX() + 15 - gameData.getCameraX()));
                 world.addEntity(createBullet(player, gameData, world, angle));
-                
                 gameData.removeEvent(e);
             }
         }
@@ -79,7 +58,7 @@ public class BulletSystem implements IServiceProcessor, IServiceInitializer {
 
     @Override
     public void stop(GameData gameData, World world) {
-        for(Entity e : bullets) {
+        for (Entity e : bullets) {
             world.removeEntity(e);
         }
     }
