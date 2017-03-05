@@ -28,13 +28,19 @@ public class WeaponSystem implements IServiceProcessor, IServiceInitializer {
 
     @Override
     public void process(GameData gameData, World world) {
-       for (Entry e : world.getWeapons().entrySet()) {
+        for (Entry e : world.getWeapons().entrySet()) {
             Entity carrier = world.getEntity((String) e.getKey());
-            ((Entity) e.getValue()).setX(carrier.getX());
-            ((Entity) e.getValue()).setY(carrier.getY());
-            
-            if (((Entity) world.getEntity((String) e.getKey())).getEntityType() == EntityType.PLAYER && gameData.getKeys().isDown(GameKeys.S)) {
-                gameData.addEvent(new Event(EventType.PLAYER_SHOOT, ((Entity) e.getValue()).getID()));
+            Entity gun = (Entity) e.getValue();
+            gun.setX(carrier.getX());
+            gun.setY(carrier.getY());
+            gun.setVelocity(carrier.getVelocity());
+
+            if (carrier.getEntityType() == EntityType.PLAYER && gameData.getKeys().isDown(GameKeys.S)) {
+                gameData.addEvent(new Event(EventType.PLAYER_SHOOT, gun.getID()));
+            }
+
+            if (carrier.getEntityType() == EntityType.ENEMY) {
+                gameData.addEvent(new Event(EventType.ENEMY_SHOOT, gun.getID()));
             }
         }
     }
