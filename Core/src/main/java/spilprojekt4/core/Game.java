@@ -65,7 +65,7 @@ public class Game implements ApplicationListener {
         for (IServiceInitializer i : SPILocator.locateAll(IServiceInitializer.class)) {
             i.start(gameData, world);
         }
-        
+
         Gdx.input.setInputProcessor(
                 new InputController(gameData)
         );
@@ -108,7 +108,7 @@ public class Game implements ApplicationListener {
         sr.begin(ShapeType.Filled);
         int healthOffset;
         int healthWidth;
-        
+
         for (Entity entity : world.getAllEntities()) {
             if (entity.getMaxLife() != 0) {
                 healthOffset = (int) spriteMap.get(entity.getSprite()).getHeight() + 5;
@@ -116,7 +116,7 @@ public class Game implements ApplicationListener {
                 sr.setColor(1f, 0f, 0, 1f);
                 sr.rect(entity.getX() - gameData.getCameraX(), entity.getY() - gameData.getCameraY() + healthOffset, healthWidth, 5);
                 sr.setColor(0.0f, 1f, 0, 1f);
-                sr.rect(entity.getX() - gameData.getCameraX(), entity.getY() - gameData.getCameraY() + healthOffset, ((float)entity.getLife() / (float)entity.getMaxLife()) * healthWidth, 5);
+                sr.rect(entity.getX() - gameData.getCameraX(), entity.getY() - gameData.getCameraY() + healthOffset, ((float) entity.getLife() / (float) entity.getMaxLife()) * healthWidth, 5);
             }
         }
         sr.end();
@@ -124,13 +124,26 @@ public class Game implements ApplicationListener {
 
     private void drawSprites() {
         batch.begin();
-        for (Entity entity : world.getEntities(EntityType.BASE, EntityType.PROJECTILE)) {
+        for (Entity entity : world.getEntities(EntityType.BASE)) {
             drawSprite(entity, spriteMap.get(entity.getSprite()), false);
         }
 
-        for (Entity entity : world.getEntities(EntityType.PLAYER, EntityType.ENEMY, EntityType.WEAPON)) {
+        for (Entity entity : world.getEntities(EntityType.ENEMY)) {
             drawSprite(entity, spriteMap.get(entity.getSprite()), true);
         }
+
+        for (Entity entity : world.getEntities(EntityType.PLAYER)) {
+            drawSprite(entity, spriteMap.get(entity.getSprite()), true);
+        }
+
+        for (Entity entity : world.getEntities(EntityType.WEAPON)) {
+            drawSprite(entity, spriteMap.get(entity.getSprite()), true);
+        }
+
+        for (Entity entity : world.getEntities(EntityType.PROJECTILE)) {
+            drawSprite(entity, spriteMap.get(entity.getSprite()), false);
+        }
+
         batch.end();
     }
 
